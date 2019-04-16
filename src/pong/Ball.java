@@ -80,25 +80,45 @@ public class Ball extends Block implements Collidable
 
 @Override
 public boolean didCollideLeft(Object o) {
-	// TODO Auto-generated method stub
+	Paddle p = (Paddle) o;
+	if(getX() + getHeight() >= p.getX() + Math.abs(getxSpeed())
+	&& (getY() >= p.getY() && getY() <= p.getY() + p.getHeight()
+	|| getY() + getHeight() >= p.getY() && getY() + getHeight() < p.getY() + p.getHeight())) {
+		return true;
+	}
 	return false;
 }
 
 @Override
 public boolean didCollideRight(Object o) {
-	// TODO Auto-generated method stub
+	Paddle p = (Paddle) o;
+	if(getX() <= p.getX() + p.getWidth() + Math.abs(getxSpeed())
+	&& (getY() >= p.getY() && getY() <= p.getY() + p.getHeight()
+	|| getY() + getHeight() >= p.getY() && getY() + getHeight() < p.getY() + p.getHeight())) {
+		return true;
+	}
 	return false;
 }
 
 @Override
 public boolean didCollideTop(Object o) {
-	// TODO Auto-generated method stub
+	Paddle p = (Paddle) o;
+	if(getX() >= p.getX() && getX() + getWidth() <= p.getX() + p.getWidth()) {
+		if(getY() + getHeight() >= p.getY()) {
+			return true;
+		}
+	}
 	return false;
 }
 
 @Override
 public boolean didCollideBottom(Object o) {
-	// TODO Auto-generated method stub
+	Paddle p = (Paddle) o;
+	if(getX() >= p.getX() && getX() + getWidth() <= p.getX() + p.getWidth()) {
+		if(getY() <= p.getY() + p.getHeight()) {
+			return true;
+		}
+	}
 	return false;
 }
 }

@@ -101,7 +101,7 @@ public class Block implements Locatable{
 		
 		Block block = (Block) obj;
 		
-		return (width == block.getWidth()) && (height == block.getHeight()) && (color == block.getColor());
+		return (width == block.getWidth()) && (height == block.getHeight()) && (xPos == block.getX()) && (yPos == block.getY()) && (color.equals(block.getColor()));
 
 	}
 
