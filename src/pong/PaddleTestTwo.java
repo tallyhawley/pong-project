@@ -71,7 +71,7 @@ public class PaddleTestTwo extends Canvas implements KeyListener, Runnable
 		}
 		
 		// check left paddle collision
-		if(ball.didCollideRight(leftPaddle) || ball.didCollideRight(leftPaddle)) {
+		if(ball.didCollideLeft(leftPaddle) || ball.didCollideRight(leftPaddle)) {
 			ball.setxSpeed(-ball.getxSpeed());
 		}
 		if(ball.didCollideTop((leftPaddle)) || ball.didCollideBottom(leftPaddle)){
@@ -79,7 +79,7 @@ public class PaddleTestTwo extends Canvas implements KeyListener, Runnable
 		}
 		
 		//check right paddle collision
-		if(ball.didCollideRight(rightPaddle) || ball.didCollideRight(rightPaddle)) {
+		if(ball.didCollideRight(rightPaddle) || ball.didCollideLeft(rightPaddle)) {
 			ball.setxSpeed(-ball.getxSpeed());
 		}
 		if(ball.didCollideTop((rightPaddle)) || ball.didCollideBottom(rightPaddle)){

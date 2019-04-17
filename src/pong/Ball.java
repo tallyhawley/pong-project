@@ -80,8 +80,8 @@ public class Ball extends Block implements Collidable
 
 @Override
 public boolean didCollideLeft(Object o) {
-	Paddle p = (Paddle) o;
-	if(getX() + getHeight() >= p.getX() + Math.abs(getxSpeed())
+	Block p = (Block) o;
+	if((getX() + getWidth() >= p.getX() - Math.abs(getxSpeed()) && getX() + getWidth() < p.getX() + 2 - Math.abs(getxSpeed()))
 	&& (getY() >= p.getY() && getY() <= p.getY() + p.getHeight()
 	|| getY() + getHeight() >= p.getY() && getY() + getHeight() < p.getY() + p.getHeight())) {
 		return true;
@@ -92,7 +92,7 @@ public boolean didCollideLeft(Object o) {
 @Override
 public boolean didCollideRight(Object o) {
 	Paddle p = (Paddle) o;
-	if(getX() <= p.getX() + p.getWidth() + Math.abs(getxSpeed())
+	if((getX() <= p.getX() + p.getWidth() + Math.abs(getxSpeed()) && getX() >= p.getX() + p.getWidth() - 2 + Math.abs(getxSpeed()))
 	&& (getY() >= p.getY() && getY() <= p.getY() + p.getHeight()
 	|| getY() + getHeight() >= p.getY() && getY() + getHeight() < p.getY() + p.getHeight())) {
 		return true;
@@ -103,10 +103,10 @@ public boolean didCollideRight(Object o) {
 @Override
 public boolean didCollideTop(Object o) {
 	Paddle p = (Paddle) o;
-	if(getX() >= p.getX() && getX() + getWidth() <= p.getX() + p.getWidth()) {
-		if(getY() + getHeight() >= p.getY()) {
-			return true;
-		}
+	if((getY() + getHeight() >= p.getY() - Math.abs(getySpeed()) && (getY() < p.getY() + p.getHeight()/2))
+		&& (getX() >= p.getX() && getX() <= p.getX() + p.getWidth()
+		|| getX() + getWidth() >= p.getX() && getX() + getWidth() < p.getX() + p.getWidth())) {
+		return true;
 	}
 	return false;
 }
@@ -114,10 +114,10 @@ public boolean didCollideTop(Object o) {
 @Override
 public boolean didCollideBottom(Object o) {
 	Paddle p = (Paddle) o;
-	if(getX() >= p.getX() && getX() + getWidth() <= p.getX() + p.getWidth()) {
-		if(getY() <= p.getY() + p.getHeight()) {
-			return true;
-		}
+	if(((getY() <= p.getY() + p.getHeight() + Math.abs(getySpeed())) && (getY() > p.getY() + p.getHeight()/2))
+		&& (getX() >= p.getX() && getX() <= p.getX() + p.getWidth()
+		|| getX() + getWidth() >= p.getX() && getX() + getWidth() < p.getX() + p.getWidth())) {
+		return true;
 	}
 	return false;
 }
