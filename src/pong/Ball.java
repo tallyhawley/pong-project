@@ -11,7 +11,7 @@ public class Ball extends Block implements Collidable
 
 	public Ball()
 	{
-		super(200,200, 20, 20, Color.gray);
+		super(395,290, 20, 20, Color.gray);
 		xSpeed = 3;
 		ySpeed = 1;
 	}
@@ -84,40 +84,48 @@ public boolean didCollideLeft(Object o) {
 	if((getX() + getWidth() >= p.getX() - Math.abs(getxSpeed()) && getX() + getWidth() < p.getX() + 2 - Math.abs(getxSpeed()))
 	&& (getY() >= p.getY() && getY() <= p.getY() + p.getHeight()
 	|| getY() + getHeight() >= p.getY() && getY() + getHeight() < p.getY() + p.getHeight())) {
-		return true;
+		if(getxSpeed() > 0) {
+			return true;
+		}
 	}
 	return false;
 }
 
 @Override
 public boolean didCollideRight(Object o) {
-	Paddle p = (Paddle) o;
+	Block p = (Block) o;
 	if((getX() <= p.getX() + p.getWidth() + Math.abs(getxSpeed()) && getX() >= p.getX() + p.getWidth() - 2 + Math.abs(getxSpeed()))
 	&& (getY() >= p.getY() && getY() <= p.getY() + p.getHeight()
 	|| getY() + getHeight() >= p.getY() && getY() + getHeight() < p.getY() + p.getHeight())) {
-		return true;
+		if(getxSpeed() < 0) {
+			return true;
+		}
 	}
 	return false;
 }
 
 @Override
 public boolean didCollideTop(Object o) {
-	Paddle p = (Paddle) o;
+	Block p = (Block) o;
 	if((getY() + getHeight() >= p.getY() - Math.abs(getySpeed()) && (getY() < p.getY() + p.getHeight()/2))
 		&& (getX() >= p.getX() && getX() <= p.getX() + p.getWidth()
 		|| getX() + getWidth() >= p.getX() && getX() + getWidth() < p.getX() + p.getWidth())) {
-		return true;
+		if(getySpeed() > 0) {
+			return true;
+		}
 	}
 	return false;
 }
 
 @Override
 public boolean didCollideBottom(Object o) {
-	Paddle p = (Paddle) o;
+	Block p = (Block) o;
 	if(((getY() <= p.getY() + p.getHeight() + Math.abs(getySpeed())) && (getY() > p.getY() + p.getHeight()/2))
 		&& (getX() >= p.getX() && getX() <= p.getX() + p.getWidth()
 		|| getX() + getWidth() >= p.getX() && getX() + getWidth() < p.getX() + p.getWidth())) {
-		return true;
+		if(getySpeed() < 0) {
+			return true;
+		}
 	}
 	return false;
 }
