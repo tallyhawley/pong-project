@@ -20,18 +20,20 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	private BufferedImage back;
 	private int leftScore;
 	private int rightScore;
-//	private Wall leftWall;
-//	private Wall rightWall;
-//	private Wall topWall;
-//	private Wall bottomWall;
+	private Wall leftWall;
+	private Wall rightWall;
+	private Wall topWall;
+	private Wall bottomWall;
 
 
 	public Pong()
 	{
 		//set up all variables related to the game
 		
-		//instantiate a Ball
+		//instantiate a Ball (TODO UNCOMMENT WHICHEVER VERSION OF THE BALL YOU ARE TESTING
 		ball = new Ball();
+//		ball = new BlinkyBall();
+//		ball = new SpeedUpBall();
 				
 		//instantiate a left Paddle
 		leftPaddle = new Paddle(40,300, 25, 75, Color.cyan);
@@ -42,10 +44,10 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		leftScore = 0;
 		rightScore = 0;
 		
-//		leftWall = new Wall(0,0,3,600);
-//		rightWall = new Wall(797,0,3,600);
-//		topWall = new Wall(0,0, 800, 1);
-//		bottomWall = new Wall(0, 597, 800, 3);
+		leftWall = new Wall(0,0,3,600);
+		rightWall = new Wall(797,0,3,600);
+		topWall = new Wall(0,0, 800, 1);
+		bottomWall = new Wall(0, 580, 800, 3);
 		
 		keys = new boolean[4];
 
@@ -83,38 +85,42 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		graphToBack.drawString("left score: " + leftScore + " | right score: " + rightScore, 325, 550);
 
 		//see if ball hits left wall or right wall
-		if(!(ball.getX()>=3 && ball.getX()<=780))
-		{
-			if(ball.getX() <= 10) rightScore++;
-			else leftScore++;
-			ball = new Ball();
+//		if(!(ball.getX()>=3 && ball.getX()<=780))
+//		{
+//			if(ball.getX() <= 10) rightScore++;
+//			else leftScore++;
+//			ball = new Ball();				// TODO UNCOMMENT WHICHEVER VERSION OF THE BALL YOU ARE TESTING
+////			ball = new BlinkyBall();
+////			ball = new SpeedUpBall();
+//		}
+		
+		if(ball.didCollideLeft(rightWall)) {
+			leftScore++;
+			ball = new Ball();				// TODO UNCOMMENT WHICHEVER VERSION OF THE BALL YOU ARE TESTING
+//			ball = new BlinkyBall();
+//			ball = new SpeedUpBall();
 		}
 		
-//		if(ball.didCollideLeft(rightWall)) {
-//			leftScore++;
-//			ball.setX(390);
-//			ball.setY(275);
-//		}
-//		
-//		if(ball.didCollideRight(leftWall)) {
-//			rightScore++;
-//			ball.setX(390);
-//			ball.setY(275);
-//		}
+		if(ball.didCollideRight(leftWall)) {
+			rightScore++;
+			ball = new Ball();				// TODO UNCOMMENT WHICHEVER VERSION OF THE BALL YOU ARE TESTING
+//			ball = new BlinkyBall();
+//			ball = new SpeedUpBall();
+		}
 
 		//see if the ball hits the top or bottom wall 
-		if(!(ball.getY()>=10 && ball.getY()<=550))
-		{
+//		if(!(ball.getY()>=10 && ball.getY()<=550))
+//		{
+//			ball.setySpeed(-ball.getySpeed());
+//		}
+		
+		if(ball.didCollideBottom(topWall)) {
 			ball.setySpeed(-ball.getySpeed());
 		}
 		
-//		if(ball.didCollideBottom(topWall)) {
-//			ball.setySpeed(-ball.getySpeed());
-//		}
-//		
-//		if(ball.didCollideTop(bottomWall)) {
-//			ball.setySpeed(-ball.getySpeed());
-//		}
+		if(ball.didCollideTop(bottomWall)) {
+			ball.setySpeed(-ball.getySpeed());
+		}
 
 		//see if the ball hits the left paddle
 		if(ball.didCollideLeft(leftPaddle) || ball.didCollideRight(leftPaddle)) {
@@ -161,9 +167,9 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		switch(toUpperCase(e.getKeyChar()))
 		{
 			case 'W' : keys[0]=true; break;
-			case 'Z' : keys[1]=true; break;
+			case 'S' : keys[1]=true; break;
 			case 'I' : keys[2]=true; break;
-			case 'M' : keys[3]=true; break;
+			case 'K' : keys[3]=true; break;
 		}
 	}
 
@@ -172,9 +178,9 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		switch(toUpperCase(e.getKeyChar()))
 		{
 			case 'W' : keys[0]=false; break;
-			case 'Z' : keys[1]=false; break;
+			case 'S' : keys[1]=false; break;
 			case 'I' : keys[2]=false; break;
-			case 'M' : keys[3]=false; break;
+			case 'K' : keys[3]=false; break;
 		}
 	}
 

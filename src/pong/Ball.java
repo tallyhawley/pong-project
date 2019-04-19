@@ -25,8 +25,20 @@ public class Ball extends Block implements Collidable
 		ySpeed = 1;
 	}
 	
-	public Ball(int x, int y, int xs, int ys) {
-		super(x,y, 20, 20, Color.gray);
+	public Ball(int x, int y, int w, int h) {
+		super(x,y,w,h);
+		xSpeed = 3;
+		ySpeed = 1;
+	}
+	
+	public Ball(int x, int y, int w, int h, Color c, int xs, int ys) {
+		super(x,y,w,h,c);
+		xSpeed = xs;
+		ySpeed = ys;
+	}
+	
+	public Ball(int x, int y, int w, int h, int xs, int ys) {
+		super(x,y, h, w, Color.gray);
 		xSpeed = xs;
 		ySpeed = ys;
 	}
@@ -81,7 +93,7 @@ public class Ball extends Block implements Collidable
 @Override
 public boolean didCollideLeft(Object o) {
 	Block p = (Block) o;
-	if((getX() + getWidth() >= p.getX() - Math.abs(getxSpeed()) && getX() + getWidth() < p.getX() + 2 - Math.abs(getxSpeed()))
+	if((getX() + getWidth() >= p.getX() - Math.abs(getxSpeed()) && getX() + getWidth() < p.getX() + p.getWidth() - Math.abs(getxSpeed()))
 	&& (getY() >= p.getY() && getY() <= p.getY() + p.getHeight()
 	|| getY() + getHeight() >= p.getY() && getY() + getHeight() < p.getY() + p.getHeight())) {
 		if(getxSpeed() > 0) {
@@ -94,7 +106,7 @@ public boolean didCollideLeft(Object o) {
 @Override
 public boolean didCollideRight(Object o) {
 	Block p = (Block) o;
-	if((getX() <= p.getX() + p.getWidth() + Math.abs(getxSpeed()) && getX() >= p.getX() + p.getWidth() - 2 + Math.abs(getxSpeed()))
+	if((getX() <= p.getX() + p.getWidth() + Math.abs(getxSpeed()) && getX() >= p.getX() + Math.abs(getxSpeed()))
 	&& (getY() >= p.getY() && getY() <= p.getY() + p.getHeight()
 	|| getY() + getHeight() >= p.getY() && getY() + getHeight() < p.getY() + p.getHeight())) {
 		if(getxSpeed() < 0) {
