@@ -30,7 +30,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	{
 		//set up all variables related to the game
 		
-		//instantiate a Ball (TODO UNCOMMENT WHICHEVER VERSION OF THE BALL YOU ARE TESTING
+		//instantiate a Ball (TODO UNCOMMENT WHICHEVER VERSION OF THE BALL YOU ARE TESTING)
 		ball = new Ball();
 //		ball = new BlinkyBall();
 //		ball = new SpeedUpBall();
@@ -84,16 +84,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.drawString("left score: " + leftScore + " | right score: " + rightScore, 325, 550);
 
-		//see if ball hits left wall or right wall
-//		if(!(ball.getX()>=3 && ball.getX()<=780))
-//		{
-//			if(ball.getX() <= 10) rightScore++;
-//			else leftScore++;
-//			ball = new Ball();				// TODO UNCOMMENT WHICHEVER VERSION OF THE BALL YOU ARE TESTING
-////			ball = new BlinkyBall();
-////			ball = new SpeedUpBall();
-//		}
-		
+		//see if ball hits left wall or right wall	
 		if(ball.didCollideLeft(rightWall)) {
 			leftScore++;
 			ball = new Ball();				// TODO UNCOMMENT WHICHEVER VERSION OF THE BALL YOU ARE TESTING
@@ -109,11 +100,6 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		}
 
 		//see if the ball hits the top or bottom wall 
-//		if(!(ball.getY()>=10 && ball.getY()<=550))
-//		{
-//			ball.setySpeed(-ball.getySpeed());
-//		}
-		
 		if(ball.didCollideBottom(topWall)) {
 			ball.setySpeed(-ball.getySpeed());
 		}
